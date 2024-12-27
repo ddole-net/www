@@ -1,6 +1,6 @@
 ---
-title: Example Guide
-description: A guide in my new Starlight docs site.
+title: PCI(E) Passthrough
+description: How to passthrough PCI(E) devices in Proxmox VE
 ---
 
 Guides lead a user through a specific task they want to accomplish, often with a sequence of steps.
