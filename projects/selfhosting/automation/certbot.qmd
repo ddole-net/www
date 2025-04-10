@@ -1,0 +1,7 @@
+---
+title: Certbot
+---
+
+- How it gets certs
+- Where certs are stored
+- How to install certbot certs in nginx

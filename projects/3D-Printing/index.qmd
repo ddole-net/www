@@ -1,0 +1,5 @@
+---
+title: 3D Printing
+---
+
+Write about mathematical 3d surfaces

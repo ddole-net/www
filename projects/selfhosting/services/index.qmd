@@ -1,0 +1,68 @@
+---
+title: Services
+---
+
+A listing of selfhosted services
+
+## The Stack
+
+### Archival and Backup
+- Paperless-ngx: A document management system
+- App Backup Script
+
+### Data/Development
+- [Forgejo](./forgejo.qmd): Git Repositories and CICD
+- [Clickhouse](./clickhouse.qmd): OLAP data warehouse
+- [Dagster](./dagster.qmd): Data orchestration
+- [Quarto](./quarto.qmd): Publishing
+- [Opengist](./opengist.qmd): Snippet pastebin
+
+### Storage
+- [Seafile](./seafile.qmd): Personal File Sync
+- [Samba](./samba.qmd): Network Drive
+- [Minio](./minio.qmd): Object Storage
+
+### Network
+- [Bind9](./bind.qmd): Authoritative and Forwarding DNS
+- [Headscale](./headscale.qmd): Mesh VPN
+- [Adguard Home](./adguard): DNS Sinkhole
+
+### Monitoring
+- [Prometheus](./Prometheus): Metric collection and aggregation database
+- [OpenTelemetry](./opentelemetry.qmd): Open framework for metric and log management
+- [Grafana](./grafana): Monitoring dashboards
+- [Uptime Kuma](./uptimekuma.qmd): ...
+
+### Personal & Productivity
+- [Linkwarden](./linkwarden.qmd): Bookmark manager and website archiver
+- [Calibre-web](./calibre-web.qmd): E-Book manager
+- [Immich](./immich.qmd): Photo Gallery
+- [Tandoor](./tandoor.qmd): Recipe Manager
+- [Vikunja](./vikunja): Task Tracking
+
+
+Each service should have this structure:
+
+## Description
+
+## Deployment
+
+### Requirements
+
+### Docker Compose
+
+### Proxy Configuration
+
+#### Nginx
+
+## Configuration
+
+### SSO
+
+### SMTP
+
+## Backups
+
+## Updates
+
+## Other Notes

@@ -1,0 +1,52 @@
+---
+title: Selfhosting
+---
+
+This is the wiki/documentation for my homelab and the services I selfhost.
+Check the left-hand sidebar for an in depth listing
+
+
+## My systems design philosophies
+- Each piece of software should have a single set of capabilities
+- There should be minimal overlap in operational responsibilities between different parts of the stack
+- Each part of the stack should fit the following:  
+    REQUIRED:  
+    - Free
+    - Open Source, ideally with an active community
+    - Should be reliable when run using commonly available knowledge and best practices.
+            SHOULD NOT REQUIRE SUMMONING EVIL SPIRITS THROUGH THE USE OF SOME ARCANE MAGIC JUST TO UPDATE SOMETHING!
+    - Software should be available from trusted repositories or as a OCI image. Building from source is acceptable if no alternatives exist.
+- Standardization is key
+- integrations and tooling should be researched and compared before implementation(figure out what parts work well with each other before becoming dependent on something)
+
+### Standardization and Integration
+Standardization is the key for allowing clean, maintainable integrations between systems and software.
+ In my case, I have standardized on the following base software:
+
+#### Proxmox Virtual Environment
+- Free and open source
+- Full support for consumer hardware
+- Reliable with a very active community(especially since the VMware Fiasco)
+- Supports linux and windows virtual machines
+- Support for cloud-init and has good automation options
+
+#### Fedora Linux
+- Free and open source
+- Very active community, with strong corporate backing
+- Up-to-date software repositories, with secure defaults
+- Is very similar to RHEL/Almalinux/RockyLinux so there is lots of documentation on how to do anything
+- Since the Fedora/RHEL family is so common in enterprise, it integrates very well with all kinds of enterprise management and monitoring tools
+- Supports cloud-init and has first-party ansible modules
+
+#### RouterOS
+- Ok not technically open source but since it's a networking appliance I don't really care. Also Mikrotik seems to be a pretty decent company.
+- Its affordable, at least my RB5009 was
+- While its not as beginner-friendly, it does exactly what you tell it to, with minimal hidden behaviors.
+- It has full support for basically every networking feature you could possibly want outside a professional datacenter
+
+#### Docker
+- This is how I run most of my applications.
+- It's easy.
+- Almost every selfhosted app provides a `docker-compose.yml` in their docs.
+- It abstracts all the difficult parts of containerization away.
+- Anyone who dislikes the fact it's not rootless. I'll switch to podman - or back to k8s - at some point.

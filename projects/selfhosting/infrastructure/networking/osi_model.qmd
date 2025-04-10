@@ -1,0 +1,5 @@
+---
+title: OSI Model
+---
+
+explanation of osi model

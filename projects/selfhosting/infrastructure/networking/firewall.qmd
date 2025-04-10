@@ -1,0 +1,13 @@
+---
+title: Firewall
+---
+
+#### Internal
+- Allow inbound traffic from my devices
+- Allow all outbound traffic
+- Deny Al
+#### Trusted
+- Allow inbound traffic from my devices
+- Allow http and https traffic to docker nodes from wifi and headscale
+- Allow dns traffic from localnets and headscale
+- Deny All

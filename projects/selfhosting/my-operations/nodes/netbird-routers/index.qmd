@@ -1,0 +1,72 @@
+---
+title: Netbird Routers
+---
+::: {.callout-note}
+Netbird routers have a hostname prefix of `nbr`: Netbird Router 1 becomes `nbr-01.lab.ddole.net`.
+:::
+
+Netbird routers are Proxmox LXC containers which are configured to expose local subnets to the Netbird Mesh Network. This is just like Tailscale's subnet routers.
+
+::: {.callout-note}
+See:
+- [Netbird Networks](https://docs.netbird.io/how-to/networks)
+- [Tailscale Subnet Routing](https://tailscale.com/kb/1019/subnets)
+:::
+
+## OS
+- Fedora-41 LXC template
+
+## Set up OpenSSH server
+```bash
+dnf up -y
+
+dnf in -y openssh-server
+
+systemctl enable --now sshd
+```
+
+## Enable IP Forwarding
+```bash
+echo 'net.ipv4.ip_forward = 1' | tee -a /etc/sysctl.d/99-tailscale.conf
+echo 'net.ipv6.conf.all.forwarding = 1' | tee -a /etc/sysctl.d/99-tailscale.conf
+sysctl -p /etc/sysctl.d/99-tailscale.conf
+```
+
+## Add `/dev/net/tun` Device
+Find the Proxmox ID of the lxc container. Add the following lines to `/etc/pve/lxc/<LXC_ID_HERE>.conf`:
+
+```
+lxc.cgroup2.devices.allow: c 10:200 rwm
+lxc.mount.entry: /dev/net/tun dev/net/tun none bind,create=file
+```
+REBOOT
+
+## Install Netbird
+::: {.callout-note}
+See [Netbird install docs](https://docs.netbird.io/how-to/installation)
+:::
+
+At time of writing(2025-03-31):
+```bash
+tee /etc/yum.repos.d/netbird.repo <<EOF
+[netbird]
+name=netbird
+baseurl=https://pkgs.netbird.io/yum/
+enabled=1
+gpgcheck=0
+gpgkey=https://pkgs.netbird.io/yum/repodata/repomd.xml.key
+repo_gpgcheck=1
+EOF
+
+dnf config-manager addrepo --from-repofile=/etc/yum.repos.d/netbird.repo
+
+dnf in -y netbird
+```
+
+## Configure Netbird
+You will need the Netbird Management URL. You can get this from the `Add Peer` button in your Netbird instance(or Netbird Cloud)
+```bash
+netbird up -m https://netbird.domain.tld:<API_PORT>
+```
+
+The rest of the netbird config is done in the admin interface.

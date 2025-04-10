@@ -1,0 +1,7 @@
+---
+title: Proxmox Nodes
+---
+::: {.callout-note}
+Proxmox nodes have a hostname prefix of `pve`: Proxmox 1 is `pve-01.lab.ddole.net`.
+:::
+

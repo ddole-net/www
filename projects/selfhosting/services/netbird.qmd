@@ -1,0 +1,38 @@
+---
+title: Netbird
+draft: true
+---
+
+## Description
+
+
+[GitHub]()
+[Docs]()
+
+## Deployment
+
+### Requirements
+- A public IP
+- An optional OIDC provider
+
+### Docker Compose
+```yaml
+
+```
+
+
+### Proxy Configuration
+
+#### Nginx
+
+## Configuration
+
+### SSO
+
+### SMTP
+
+## Backups
+
+## Updates
+
+## Other Notes

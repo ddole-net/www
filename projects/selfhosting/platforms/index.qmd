@@ -1,0 +1,7 @@
+---
+title: "Platforms"
+draft: true
+---
+
+
+Major software used in selfhosting. How to do common ops
