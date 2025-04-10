@@ -1,0 +1,12 @@
+---
+title: Service Access Zones
+---
+
+## Service Zones
+1. Public
+	- Internet Facing
+	- Hosted on VPS
+2. Trusted
+	- For Friends and Fam
+3. Internal
+	- For me only

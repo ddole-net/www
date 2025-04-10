@@ -1,0 +1,15 @@
+---
+title: Backups
+---
+
+- Only thing that needs backup is applications, each app has a single btrfs subvol
+## btrbk
+There are three distinct operations
+1. Online/Offline application snapshots: executed on Docker Node
+	1. docker compose down
+	2. btrbk snapshot
+	3. docker compose up
+2. Snapshot Replication: executed on Backup Node
+	1. . Btrbk pull snapshots
+3. Off-site Backups: executed on Backup Node
+	1. btrfs send | gpg | dd --> s3

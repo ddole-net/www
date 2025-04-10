@@ -1,0 +1,8 @@
+---
+title: "Docker"
+---
+
+- discuss history of the tool
+- Common thoughts
+- write a page on using plain docker
+- page on compose

@@ -1,0 +1,42 @@
+---
+title: Identity and Access Management
+---
+
+
+- I don't need active linux user management.  
+
+Each linux host should have three users:
+    - dhruv: private keys on ctl-01, use it as a jumpbox/workspace
+    - svc_ctl: private keys on ctl-01 used for backups(eventually), cron jobs, ansible...
+    - svc_forgejo: private key stored only in forgejo secrets, used for CI management
+
+## People
+
+- Each Person
+
+- Each Person also gets a user group: for netbird personal devices
+
+
+## Services
+- Each service gets a service account
+    - for mail and ldap binding
+
+- linux services accounts should have passwordless sudo, and ssh keys
+
+## Groups
+
+- Admin: Administrative access
+
+### Analysts
+- grafana edit
+- DB RO access
+
+### Forgejo-users
+- User Access to Forgejo: disable orgs
+
+### Engineer
+- RW on infrastructure stuff
+
+### Family
+
+### Friends
