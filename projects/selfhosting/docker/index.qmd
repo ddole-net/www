@@ -2,7 +2,12 @@
 title: "Docker"
 ---
 
-- discuss history of the tool
-- Common thoughts
-- write a page on using plain docker
-- page on compose
+## Why Do I use Docker?
+I used to use a k8s cluster but I ended up spending more time managing k8s deployments and it became difficult to manage backups. I decided to simply things and went to docker over podman for the following reasons:  
+
+- Developers often recommend docker compose for deployments
+- Developers often provide ready-to-use docker-compose files
+- A compose deployment can be easily backed up and migrated from host to host.
+
+If I ever get a dedicated storage node and better networking hardware to build a SAN, I'll probably go back to k8s(more on this later).
+

@@ -1,5 +1,6 @@
 ---
 title: Terraform
+draft: true
 ---
 
 - Basics of terraform

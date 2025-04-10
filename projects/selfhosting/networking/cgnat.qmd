@@ -1,3 +1,4 @@
 ---
 title: CG-NAT Woes
+draft: true
 ---

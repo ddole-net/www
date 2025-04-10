@@ -1,5 +1,6 @@
 ---
 title: Controller
+draft: true
 ---
 ::: {.callout-note}
 Controller nodes have a hostname prefix of `ctl`: Controller 1 becomes `ctl-01.lab.ddole.net`.

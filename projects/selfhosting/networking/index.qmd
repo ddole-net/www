@@ -1,8 +1,55 @@
 ---
-title: "Networking"
-code-tools: true
+title: Networking
 ---
 
-- explain the basics of networking and why its important not to half ass it
-- osi model...
-- how ive set it up
+## Basics
+
+Network Planning is important. If your network is just put together as you go, it'll probably end up so screwed up that you'll be redoing it every 2 weeks. The keyword here is **network segmentation**
+
+## Network Segmentation
+
+If you have the hardware capabilities, you should do section off different parts of your network from each other. This allows you to control and monitor traffic between networks. If you don't have the hardware, budget for it, or maybe investigate a software-defined-networking solution(proxmox, tailscale, netmaker, tailscale, etc.)
+
+## Layer 2 VLANs
+
+The best way to segment networks is through the use of VLAN [IEEE 801.1Q](https://en.wikipedia.org/wiki/IEEE_802.1Q). The basic principle of a VLAN is simple. Each packet sent through a VLAN is tagged with the VLAN ID corresponding to that VLAN (a VLAN tag). VLANs are a Layer 2 concept: hosts on a VLAN can only communicate with hosts on that same VLAN, and only via MAC address(though you're almost always going to assign an IP subnet and addresses to each host). Hosts can be connected to each other on a VLAN using a smart switch.
+
+## Layer 3 Subnets
+
+In order to route between VLANs, we need a VLAN aware router. Most routers can do basic VLAN routing, I recommend a Mikrotik wired router running RouterOS. They start at around \$40 and are very fully featured. Whatever router you choose, the steps are mostly the same: you create VLANs, assign each one a subnet, optionally configure DHCP, and configure the firewall to allow routing. 
+
+You should create as many VLANs/Subnets as needed to separate different types of traffic. Keep in mind, that if it becomes too difficult to manage, then it's probably worse than a single flat network with properly firewalled hosts. There are also performance considerations. Some routers and switches may not be able to handle lots of high traffic VLANs or subnets without slowing the network. 
+
+## Basic Virtual Network Example
+
+This is an example of a basic homelab network plan. There are three LAN subnets: `HOME`, `LAB` and `SERVICE`. Each is connected to the router, and the router is connected to the `WAN`(internet) uplink.
+
+```{mermaid}
+
+graph LR
+    Router[Router]
+    WAN[WAN]
+    LAB[LAB]
+    HOME[HOME]
+    SERVICE[SERVICE]
+
+    Router --> WAN
+    HOME --> Router
+    LAB --> Router
+    SERVICE --> Router
+```
+
++-----------+---------+--------------+------------------------------------------------------------------------+
+| Name      | VLAN ID | Subnet       | Purpose                                                                |
++===========+=========+==============+========================================================================+
+| `HOME`    | 10      | 10.0.10.0/24 | Home WiFi: access to internet and select local services                |
++-----------+---------+--------------+------------------------------------------------------------------------+
+| `LAB`     | 20      | 10.0.20.0/24 | Internal Lab network, can be changed, broken, fixed without affecting  |
+|           |         |              |                                                                        |
+|           |         |              | `HOME`                                                                 |
++-----------+---------+--------------+------------------------------------------------------------------------+
+| `SERVICE` | 30      | 10.0.30.0/24 | Service hosts: web and application servers                             |
++-----------+---------+--------------+------------------------------------------------------------------------+
+
+## My Network
+link to my network page

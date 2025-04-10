@@ -1,5 +1,6 @@
 ---
 title: Storage Nodes
+draft: true
 ---
 ::: {.callout-note}
 :::

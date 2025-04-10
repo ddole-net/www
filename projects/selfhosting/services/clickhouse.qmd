@@ -1,6 +1,15 @@
 ---
 title: Clickhouse
-
+description: An OLAP database deployed with docker compose
+date: last-modified
+date-format: iso
+keywords:
+  - clickhouse
+  - docker
+  - compose
+  - nginx
+  - ldap
+  - olap
 ---
 
 ## Description
@@ -13,6 +22,7 @@ It has many options for deployment. I wil use docker compose.
 ### Requirements
 - TLS certs or a reverse proxy configured for TLS termination.
 - If using LDAP: an LDAP server.
+
 ### Docker Compose
 
 ```yaml
@@ -56,7 +66,7 @@ server {
     # HTTP server config
     listen 80;
     listen [::]:80;
-    server_name clickhouse.domain.tld;
+    server_name clickhouse.ddole.net;
     # 301 redirect to HTTPS
     return 301 https://$host$request_uri;
 }
@@ -64,11 +74,11 @@ server {
     # HTTPS server config
     listen 443 ssl;
     listen [::]:443 ssl;
-    server_name clickhouse.domain.tld;
+    server_name clickhouse.ddole.net;
 
     # TLS certificates
-    ssl_certificate /etc/letsencrypt/live/domain.tld/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/domain.tld/privkey.pem;
+    ssl_certificate /etc/letsencrypt/live/ddole.net/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/ddole.net/privkey.pem;
     add_header Strict-Transport-Security "max-age=63072000" always;
 
     client_max_body_size 0;
@@ -95,9 +105,9 @@ I use the following block inside clickhouse's config.xml to connect to my authen
 ```xml
 <ldap_servers>
     <authentik>
-        <host>ldap.domain.tld</host>
+        <host>ldap.ddole.net</host>
         <port>636</port>
-        <bind_dn>cn={user_name},ou=users,dc=ldap,dc=domain,dc=tld</bind_dn>
+        <bind_dn>cn={user_name},ou=users,dc=ldap,dc=ddole,dc=net</bind_dn>
         <enable_tls>yes</enable_tls>
         <tls_require_cert>allow</tls_require_cert>
     </authentik>
@@ -116,7 +126,7 @@ Authentik groups are mapped to clickhouse roles in the following way: all requir
             <engineers/>
         </roles>
         <role_mapping>
-        <base_dn>dc=ldap,dc=domain,dc=tld</base_dn>
+        <base_dn>dc=ldap,dc=ddole,dc=net</base_dn>
         <search_filter>
             (&amp;(objectClass=groupOfUniqueNames)(member={bind_dn}))
         </search_filter>
@@ -126,12 +136,3 @@ Authentik groups are mapped to clickhouse roles in the following way: all requir
     </ldap>
 </user_directories>
 ```
-
-
-### SMTP
-
-## Backups
-
-## Updates
-
-## Other Notes

@@ -4,6 +4,8 @@ project:
 website:
   title: "Dhruv's Website"
   page-navigation: true
+  twitter-card: true
+  open-graph: true
   navbar:
     search: true
     right:
@@ -17,8 +19,7 @@ website:
         text: About
       - icon: github
         href: https://github.com/ddole-net
-#      - icon: twitter
-#        href: https://twitter.com
+
   sidebar:
     id: "projects"
     title: "Projects"
@@ -35,14 +36,17 @@ website:
       # - text: Self-Hosting
       #   href: projects/selfhosting
       
-
+theme:
+  light: simplex
+  # dark: [simplex, dark-mode.scss]
 
 format:
   html:
-    theme:
-      - cosmo
-      - brand
-    css: styles.css
+    smooth-scroll: true
+#     theme:
+#       - cosmo
+#       - brand
+#     css: styles.css
 
 
 

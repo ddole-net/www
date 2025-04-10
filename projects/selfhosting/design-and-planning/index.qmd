@@ -16,18 +16,18 @@ title: Design and Planning
 - Standardization is key
 - integrations and tooling should be researched and compared before implementation(figure out what parts work well with each other before becoming dependent on something)
 
-### Standardization and Integration
+## Standardization and Integration
 Standardization is the key for allowing clean, maintainable integrations between systems and software.
  In my case, I have standardized on the following base software:
 
-#### Proxmox Virtual Environment
+### Proxmox Virtual Environment
 - Free and open source
 - Full support for consumer hardware
 - Reliable with a very active community(especially since the VMware Fiasco)
 - Supports linux and windows virtual machines
 - Support for cloud-init and has good automation options
 
-#### Fedora Linux
+### Fedora Linux
 - Free and open source
 - Very active community, with strong corporate backing
 - Up-to-date software repositories, with secure defaults
@@ -35,13 +35,13 @@ Standardization is the key for allowing clean, maintainable integrations between
 - Since the Fedora/RHEL family is so common in enterprise, it integrates very well with all kinds of enterprise management and monitoring tools
 - Supports cloud-init and has first-party ansible modules
 
-#### RouterOS
+### RouterOS
 - Ok not technically open source but since it's a networking appliance I don't really care. Also Mikrotik seems to be a pretty decent company.
 - Its affordable, at least my RB5009 was
 - While its not as beginner-friendly, it does exactly what you tell it to, with minimal hidden behaviors.
 - It has full support for basically every networking feature you could possibly want outside a professional datacenter
 
-#### Docker
+### Docker
 - This is how I run most of my applications.
 - It's easy.
 - Almost every selfhosted app provides a `docker-compose.yml` in their docs.

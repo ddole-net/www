@@ -1,0 +1,26 @@
+---
+title: This Website
+draft: true
+---
+
+This website is a static Quarto site, hosted on AWS with CloudFront and S3.
+
+## Development Workflow
+1. Create Quarto site
+```bash
+quarto create project website ddole.net 
+```
+2. Make changes
+3. Push changes to Forgejo(or Github)
+
+## AWS Configuration
+1. Create an S3 Bucket
+2. Disable block public access on s3 bucket
+3. enable static website hosting
+4. create basic cloudfront distribution
+5. request tls cert
+6. create dns records to cloudfront
+
+## CI/CD Workflow
+
+put actions workflow here

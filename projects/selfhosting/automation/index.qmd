@@ -1,5 +1,6 @@
 ---
 title: Automation
+draft: true
 ---
 
 - Basic Automation stuff

@@ -1,5 +1,5 @@
 ---
-title: "About"
+title: "Dhruv Dole"
 image: profile.jpg
 about:
   template: jolla
@@ -16,4 +16,4 @@ about:
 
 ---
 
-About Me
+Bio here

@@ -1,5 +1,6 @@
 ---
 title: Hardware
+draft: true
 ---
 
 Info on hardware

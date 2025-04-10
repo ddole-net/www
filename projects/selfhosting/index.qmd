@@ -1,5 +1,13 @@
 ---
 title: Self-Hosting
+description: Hosting web apps and servers myself instead of paying for cloud subscriptions
+date: last-modified
+date-format: iso
+keywords:
+  - self-hosting
+  - personal
+  - projects
+  - hobby
 ---
 
 This is the wiki/documentation for my homelab and the services I selfhost.

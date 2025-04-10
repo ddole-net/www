@@ -1,3 +1,13 @@
 ---
 title: RouterOS
+draft: true
 --- 
+
+Dump entire routeros config, and document every custom setting here
+
+- fallback port
+- dns
+- vlans
+- dhcp servers
+- firewall
+- wireguard

@@ -1,3 +1,4 @@
 ---
 title: Fedora Linux
+draft: true
 ---

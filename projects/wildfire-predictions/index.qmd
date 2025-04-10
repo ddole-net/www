@@ -1,5 +1,6 @@
 ---
 title: Wildfire Predictions
+draft: true
 ---
 
 Write about the capstone project
