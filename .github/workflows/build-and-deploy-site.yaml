@@ -31,7 +31,6 @@ jobs:
 
       - name: Render site
         run: |
-          ls -al
           source .venv/bin/activate
           quarto render
 
