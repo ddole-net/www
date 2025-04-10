@@ -3,5 +3,9 @@ title: "Home"
 
 ---
 
+## Hello!
 
-THIS IS THE HOME PAGE
+Welcome to my website etc...
+
+
+I'm going to add posts at [posts](./posts/).

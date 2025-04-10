@@ -24,10 +24,12 @@ jobs:
           version: "0.6.13"
 
       - name: Set up Python
-        run: uv python install
+        run: |
+          uv python install
 
       - name: Install the Project Dependencies
-        run: uv sync --all-extras --dev
+        run: |
+          uv sync --all-extras --dev
 
       - name: Render site
         run: |
@@ -37,3 +39,7 @@ jobs:
       - name: Copy files to S3
         run: |
           aws s3 sync _site/ s3://ddole.net
+
+      - name: Invalidate CloudFront Distribution
+        run: |
+          aws cloudfront create-invalidation --distribution-id E2WKOW26L9UJSF --paths '/*'
