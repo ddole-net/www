@@ -1,9 +1,0 @@
----
-title: Controller
----
-::: {.callout-note}
-Controller nodes have a hostname prefix of `ctl`: Controller 1 becomes `ctl-01.lab.ddole.net`.
-:::
-
-- Share Certs
-- PVE shared storage

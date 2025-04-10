@@ -1,8 +1,0 @@
----
-title: "Networking"
-code-tools: true
----
-
-- explain the basics of networking and why its important not to half ass it
-- osi model...
-- how ive set it up

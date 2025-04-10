@@ -1,4 +1,0 @@
----
-title: Linux
-draft: true
----

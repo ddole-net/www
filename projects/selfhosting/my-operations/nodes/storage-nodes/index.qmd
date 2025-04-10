@@ -1,5 +1,0 @@
----
-title: Storage Nodes
----
-::: {.callout-note}
-:::

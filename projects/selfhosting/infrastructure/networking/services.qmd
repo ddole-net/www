@@ -1,9 +1,0 @@
----
-title: Services
----
-
-### dns
-
-### ntp
-
-### dhcp

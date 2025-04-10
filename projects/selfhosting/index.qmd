@@ -1,5 +1,5 @@
 ---
-title: Selfhosting
+title: Self-Hosting
 ---
 
 This is the wiki/documentation for my homelab and the services I selfhost.

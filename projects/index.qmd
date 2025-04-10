@@ -3,3 +3,21 @@ title: Projects
 ---
 
 This is the project main page
+
+## List 
+
+- 3D printing
+- The Money Project
+- Wildfire Predictions
+- Selfhosting: this should be all of my operational stuff(Lab Documentation), Anything that is a general purpose article should be in posts
+    - Design and Planning
+    - Networking
+    - Hardware
+    - RouterOS
+    - Proxmox
+    - Fedora
+    - Identity and Access Management
+    - Docker
+    - Backup Management
+    - Services
+    - Automation

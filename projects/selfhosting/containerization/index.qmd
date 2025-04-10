@@ -1,6 +1,0 @@
----
-title: "Containerization"
----
-
-- Explain why containerization is so useful
-- explain differences between different systems

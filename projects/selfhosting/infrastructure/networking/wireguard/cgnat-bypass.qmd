@@ -1,3 +1,0 @@
----
-title: CG-NAT Bypass
----

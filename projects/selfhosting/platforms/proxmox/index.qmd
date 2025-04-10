@@ -1,9 +1,0 @@
----
-title: "Proxmox"
-draft: true
----
-
-- WHy proxmox is useful
-- designing a cluster
-- installs
-- basic config
