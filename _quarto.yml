@@ -20,11 +20,22 @@ website:
 #      - icon: twitter
 #        href: https://twitter.com
   sidebar:
+    id: "projects"
     title: "Projects"
     style: "docked"
     search: false
     contents: 
-      - auto: projects
+      - auto: projects/
+      # - text: 3D Printing
+      #   href: projects/3d-printing/
+      # - text: Wildfire Predictions
+      #   href: projects/wildfire-predictions/
+      # - text: The Money Project
+      #   href: projects/money/
+      # - text: Self-Hosting
+      #   href: projects/selfhosting
+      
+
 
 format:
   html:

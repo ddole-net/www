@@ -1,5 +1,6 @@
 ---
 title: Projects
+sidebar: projects
 ---
 
 This is the project main page
