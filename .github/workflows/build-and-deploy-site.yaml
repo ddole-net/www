@@ -32,7 +32,7 @@ jobs:
       - name: Render site
         run: |
           ls -al
-          source 
+          source .venv/bin/activate
           quarto render
 
       - name: Copy files to S3
