@@ -26,11 +26,13 @@ jobs:
       - name: Set up Python
         run: uv python install
 
-      - name: Install the Project
+      - name: Install the Project Dependencies
         run: uv sync --all-extras --dev
 
       - name: Render site
         run: |
+          ls -al
+          source 
           quarto render
 
       - name: Copy files to S3
