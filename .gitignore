@@ -1,6 +1,5 @@
 .idea/
-_site
+.venv/
 
 .quarto/
-
-.venv/
+_site
