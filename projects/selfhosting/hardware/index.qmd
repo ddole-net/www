@@ -3,4 +3,4 @@ title: Hardware
 draft: true
 ---
 
-Info on hardware
+#TODO describe each baremetal node

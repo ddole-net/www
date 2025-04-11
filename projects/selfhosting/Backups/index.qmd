@@ -14,9 +14,18 @@ The 3-2-1 rule says that you should have three copies of each item, on two diffe
 
 ### Nightly Backups
 
-**On docker node:** 1. Stop all containers for a service 2. Snapshot the service directory 3. Start all containers for a service 4. Transfer the snapshot to the [control node](../nodes/controller/)
+**On docker node:** 
 
-**On control node:** 6. Checksum snapshot 7. Create Compressed tarball 8. Verify backup validity
+1. Stop all containers for a service
+2. Snapshot the service directory
+3. Start all containers for a service
+4. Transfer the snapshot to the [control node](../nodes/controller/)
+
+**On control node:**
+
+6. Checksum snapshot
+7. Create Compressed tarball
+8. Verify backup validity
 
 ### Weekly Cloud Sync
 

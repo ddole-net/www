@@ -11,3 +11,7 @@ I used to use a k8s cluster but I ended up spending more time managing k8s deplo
 
 If I ever get a dedicated storage node and better networking hardware to build a SAN, I'll probably go back to k8s(more on this later).
 
+
+#TODO add a single container docker compose example
+
+#TODO add a multi-container docker compsoe example

@@ -36,3 +36,13 @@ draft: true
 ## Updates
 
 ## Other Notes
+
+
+## Policies
+
+### General
+- Users should be able to access trusted services
+
+### Personal Device Policies
+- Each user should have unfettered access to their own netbird devices.
+- Users should not be able to access devices added by other users

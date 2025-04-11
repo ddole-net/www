@@ -5,16 +5,16 @@ title: Identity and Access Management
 
 - I don't need active linux user management.  
 
-Each linux host should have three users:
+Each linux host should have three static users:
     - dhruv: private keys on ctl-01, use it as a jumpbox/workspace
-    - svc_ctl: private keys on ctl-01 used for backups(eventually), cron jobs, ansible...
-    - svc_forgejo: private key stored only in forgejo secrets, used for CI management
+    - svc_ctl: private keys on ctl-01 used for backups, cron jobs, ansible...
+    - svc_forgejo: private key stored only in forgejo secrets, used in CI/CD to deploy things
 
 ## People
 
-- Each Person
+- Each Person gets an authentik user
 
-- Each Person also gets a user group: for netbird personal devices
+- Each Person also gets an authentik user group: for netbird [personal device policies](../services/netbird.qmd#personal-device-policies)
 
 
 ## Services

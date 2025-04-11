@@ -1,0 +1,9 @@
+---
+title: SELinux
+---
+
+#TODO Explain basic of how it works
+
+#TODO Explain how to check selinux logs for denials
+
+#TODO list common selinux denials and remedies(for homelab:nginx, nfs, ...)

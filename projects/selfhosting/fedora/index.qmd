@@ -1,4 +1,12 @@
 ---
 title: Fedora Linux
-draft: true
+draft: false
 ---
+
+I chose Fedora as my standard distribution for a variety of reasons:
+
+  - wide variety of up-to-date packages
+  - default configuration is perfomative, secure, and usable(see [selinux](./selinux.qmd))
+  - RHEL and Fedora familiy distros are very common in enterprise and academic spaces: computational programming packages will often often provide `.rpm` packages.
+  - RHEL documentation is usually applicable
+  - Provides a great cloud-init capable image for qemu based virtualization([proxmox](../proxmox/))

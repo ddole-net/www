@@ -6,19 +6,18 @@ title: Design and Planning
 ## My systems design philosophies
 - Each piece of software should have a single set of capabilities
 - There should be minimal overlap in operational responsibilities between different parts of the stack
-- Each part of the stack should fit the following:  
-    REQUIRED:  
+- Each part of the stack should fit the following conditions:  
     - Free
     - Open Source, ideally with an active community
     - Should be reliable when run using commonly available knowledge and best practices.
-            SHOULD NOT REQUIRE SUMMONING EVIL SPIRITS THROUGH THE USE OF SOME ARCANE MAGIC JUST TO UPDATE SOMETHING!
     - Software should be available from trusted repositories or as a OCI image. Building from source is acceptable if no alternatives exist.
+    - Should have a low resource usage at idle
 - Standardization is key
 - integrations and tooling should be researched and compared before implementation(figure out what parts work well with each other before becoming dependent on something)
 
 ## Standardization and Integration
 Standardization is the key for allowing clean, maintainable integrations between systems and software.
- In my case, I have standardized on the following base software:
+In my case, I have standardized on the following base software:
 
 ### Proxmox Virtual Environment
 - Free and open source
@@ -39,7 +38,7 @@ Standardization is the key for allowing clean, maintainable integrations between
 - Ok not technically open source but since it's a networking appliance I don't really care. Also Mikrotik seems to be a pretty decent company.
 - Its affordable, at least my RB5009 was
 - While its not as beginner-friendly, it does exactly what you tell it to, with minimal hidden behaviors.
-- It has full support for basically every networking feature you could possibly want outside a professional datacenter
+- It has full support for basically every networking feature you could possibly want outside a commercial datacenter
 
 ### Docker
 - This is how I run most of my applications.

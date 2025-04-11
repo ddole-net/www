@@ -19,7 +19,10 @@ website:
         text: About
       - icon: github
         href: https://github.com/ddole-net
-
+  draft-mode: unlinked
+  search:
+    copy-button: true
+    show-item-context: tree
   sidebar:
     id: "projects"
     title: "Projects"
