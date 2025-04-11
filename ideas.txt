@@ -1,0 +1,23 @@
+# Posts
+- Proxmox Cloud-Init template creation
+- RouterOS wireguard CGNAT relay
+- Selfhosted Lakehouse with Minio and Deltalake
+- Dagster tutorial with links to Projects dagster pages
+- HomeLab networking considerations
+- Why learn Docker?
+- Kubernetes vs Docker in HomeLab
+- Forgejo Runners
+- Quarto Sites with Github Actions, S3, and CloudFront
+- btrfs and btrbk
+- My Selfhosted Data Stack
+- Intros to each Project
+
+
+# Projects
+- The Money Project
+- Self-hosting
+- Capstone: Adapt to my environment and deploy publicly
+- 3D Printing
+
+# Site
+- Dark Mode

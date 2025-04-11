@@ -42,7 +42,7 @@ theme:
 
 format:
   html:
-    smooth-scroll: true
+    smooth-scroll: false
 #     theme:
 #       - cosmo
 #       - brand

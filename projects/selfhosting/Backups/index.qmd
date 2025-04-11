@@ -1,11 +1,42 @@
 ---
 title: Backup Management
-draft: true
 ---
 
+Backups are a tricky problem for me. Since I don't want to create dedicated backup scripts for each service, I try to run everything using docker compose with bind mounts. This means that each service is made up of a single directory containing the service config files, docker-compose.yml, and the container bind mounts. This allows me to run `docker compose down` then compress and archive the entire deployment directory.
+
+::: callout-note
+I am prioritizing backup consistency over high availablity because I don't have the hardware to support true HA anyway.
+:::
 
 ## 3-2-1 Backups
 
-## btrfs and btrbk
+The 3-2-1 rule says that you should have three copies of each item, on two different storage mediums, and at least one copy stored offsite. This costs too much money for me so I don't follow the rule perfectly, though I do try to keep copies in the Cloud. Also, most of my data can be replaced relatively easy and the truly critical data is very small.
 
-## Offsite Backups
+### Nightly Backups
+
+**On docker node:** 1. Stop all containers for a service 2. Snapshot the service directory 3. Start all containers for a service 4. Transfer the snapshot to the [control node](../nodes/controller/)
+
+**On control node:** 6. Checksum snapshot 7. Create Compressed tarball 8. Verify backup validity
+
+### Weekly Cloud Sync
+
+::: callout-warning
+NOT YET IMPLEMENTED
+:::
+
+1.  Copy latest backups to blob storage
+2.  Hope I don't need to restore
+
+## btrfs
+
+My control and docker nodes each use btrfs filesystems for mass storage. Each compose directory is actually a btrfs subvolume. This allows instantaneous snapshotting and the ability to transfer the snapshots between services at the filesystem level(allowing btrfs to maintain the integrity of the data).
+
+I don't necessarily like this approach, but in this iteration of my homelab, I am prioritizing simplicity over everything.
+
+## btrbk
+
+`btrbk` is a cli tool that manages snapshots and backups of btrfs subvolumes for local and remote hosts.
+
+::: callout-note
+More information will be added at a later time.
+:::
