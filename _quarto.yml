@@ -1,5 +1,8 @@
 project:
   type: website
+  render:
+    - "*.qmd"
+    - "!archives"
 
 website:
   title: "Dhruv's Website"
