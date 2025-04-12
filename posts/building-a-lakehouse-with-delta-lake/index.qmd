@@ -1,6 +1,14 @@
 ---
-title: Building a Lakehouse with Deltalake
-description: ''
+title: Building a Lakehouse with Delta Lake
+description: 'How to use the Delta Lake python library to manage massive amounts of data at scale.'
+author: Dhruv Dole
+keywords:
+  - python
+  - deltalake
+  - lakehouse
+  - pyarrow
+  - polars
+  - minio
 ---
 
 The first step in creating any kind of data processes is setting up a system for efficient storage and querying of your data. There are two major storage concepts for OLAP data storage: Data warehouses and data lakes. Warehouses act as a central source of truth for analytics and reporting processes. Warehouses are designed to efficiently store and query highly structured data. Warehouses are often OLAP databases like ClickHouse or managed offerings like Amazon Redshift, Google BigQuery, or Snowflake.
