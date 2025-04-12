@@ -20,7 +20,9 @@ This notebook will explain how I set up my own personal data lakehouse with Mini
 ##  What is A Delta Lake Table
 A Delta Lake table is simply a collection of parquet files with matching schemas, and a json transaction log. I won't go into too much detail here because it is better explained [here](https://delta-io.github.io/delta-rs/how-delta-lake-works/architecture-of-delta-table/).
 
-It is important to remember that unlike a basic parquet file, delta tables can become [polluted](https://delta-io.github.io/delta-rs/usage/managing-tables/) with 'old' files. I will explain below how to manage this in python.## Prerequisites
+It is important to remember that unlike a basic parquet file, delta tables can become [polluted](https://delta-io.github.io/delta-rs/usage/managing-tables/) with 'old' files. I will explain below how to manage this in python.
+
+## Prerequisites
 
 1. A Minio Bucket with object locking enabled
 2. Minio credentials with R/W access to the bucket
