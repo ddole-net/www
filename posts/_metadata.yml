@@ -11,3 +11,7 @@ format:
     toc: true
     grid:
       body-width: 1200px
+
+comments:
+  giscus:
+    repo: ddole-net/www
