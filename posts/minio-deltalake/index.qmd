@@ -1,0 +1,188 @@
+---
+title: Building a Lakehouse with Deltalake
+description: ''
+---
+
+The first step in creating any kind of data processes is setting up a system for efficient storage and querying of your data. There are two major storage concepts for OLAP data storage: Data warehouses and data lakes. Warehouses act as a central source of truth for analytics and reporting processes. Warehouses are designed to efficiently store and query highly structured data. Warehouses are often OLAP databases like ClickHouse or managed offerings like Amazon Redshift, Google BigQuery, or Snowflake.
+
+Data Lakes are simply a central storage system for massive amounts of data in any form. This could mean log dumps, json files, CSVs, images... It is also possible to combine the two concepts into the Data Lakehouse. The principle here is storing data using one of the many open table formats(IceBerg, Hudi, Deltalake) in some kind of mass storage, generally cloud object storage like Amazon S3 or Azure Blob Storage. This allows raw, unstructured data to be stored in the same system as structured tabular data. This can provide large cost savings and simplify operations significantly.
+
+This notebook will explain how I set up my own personal data lakehouse with Minio and Delta Lake, while performing queries with pyArrow and Polars
+
+##  What is A Delta Lake Table
+A Delta Lake table is simply a collection of parquet files with matching schemas, and a json transaction log. I won't go into too much detail here because it is better explained [here](https://delta-io.github.io/delta-rs/how-delta-lake-works/architecture-of-delta-table/).
+
+It is important to remember that unlike a basic parquet file, delta tables can become [polluted](https://delta-io.github.io/delta-rs/usage/managing-tables/) with 'old' files. I will explain below how to manage this in python.## Prerequisites
+
+1. A Minio Bucket with object locking enabled
+2. Minio credentials with R/W access to the bucket
+3. Some tabular data
+
+I will be using a [COVID-19 Open-Dataset](https://github.com/GoogleCloudPlatform/covid-19-open-data).
+
+## Code
+
+### Load Environment Variables
+
+```{python}
+import os
+from dotenv import find_dotenv, load_dotenv
+
+try:
+    env_file = find_dotenv(raise_error_if_not_found=True)
+    load_dotenv(env_file)
+except IOError as e:
+    print(e)
+
+MINIO_ENDPOINT = os.environ['MINIO_ENDPOINT']
+MINIO_ACCESS_KEY = os.environ['MINIO_ACCESS_KEY']
+MINIO_SECRET_KEY = os.environ['MINIO_SECRET_KEY']
+```
+
+### Download Data
+
+```{python}
+import polars as pl
+data_url = 'https://storage.googleapis.com/covid19-open-data/v3/epidemiology.csv'
+
+schema = {
+    'date': pl.Date,
+    'location_key': pl.String,
+    'new_confirmed': pl.Int64,
+    'new_deceased': pl.Int64,
+    'new_recovered': pl.Int64,
+    'new_tested': pl.Int64,
+    'cumulative_confirmed': pl.Int64,
+    'cumulative_deceased': pl.Int64,
+    'cumulative_recovered': pl.Int64,
+    'cumulative_tested': pl.Int64,
+}
+df = pl.read_csv(data_url, schema=schema)
+
+df.sample(10)
+```
+
+### Create Empty Deltalake Schema
+::: { .callout-note }
+The variable `dtable_schema_name` maps to a key prefix added after the `bucket_name` and before the actual Delta Table files. This means we can store as many different tables in one bucket as we want.
+:::
+
+```{python}
+from deltalake import DeltaTable
+
+# Minio Connection Parameters
+storage_options = {
+    'endpoint_url': MINIO_ENDPOINT,
+    'AWS_ACCESS_KEY_ID': MINIO_ACCESS_KEY,
+    'AWS_SECRET_ACCESS_KEY': MINIO_SECRET_KEY,
+    'conditional_put': 'etag' #https://delta-io.github.io/delta-rs/usage/writing/writing-to-s3-with-locking-provider/#enabling-concurrent-writes-for-alternative-clients
+}
+bucket_name = 'deltalake-demo'
+dtable_schema_name = 'covid'
+
+dtable_schema = df.to_arrow().schema  # convert dataframe schema to pyArrow
+
+dtable = DeltaTable.create(table_uri=f's3a://{bucket_name}/{dtable_schema_name}', schema=dtable_schema,
+                           storage_options=storage_options)
+```
+
+### Write Dataframe to Delta Lake
+
+```{python}
+df.write_delta(dtable, mode='append')
+```
+
+### Querying the Delta Lake
+Now that our dataset is in the DeltaLake we have to be able to query it without loading all of it into memory at once. We can use Polars or PyArrow for this purpose.
+
+#### Polars
+
+```{python}
+# Create a LazyFrame representing the Delta Table
+ldf = pl.scan_delta(dtable, use_pyarrow=True)
+ldf.collect_schema()
+```
+
+Return the first 10 records:
+
+```{python}
+ldf.head(10).collect()
+```
+
+Find all records in July 2022 and return the first 10:
+
+```{python}
+ldf.filter(
+    (pl.col('date') >= pl.date(2022, 7, 1)) &
+    (pl.col('date') < pl.date(2022, 8, 1))
+).collect().head(10)
+```
+
+Find all records in July 2022 and find the average `new_confirmed` cases per `location_key`:
+
+```{python}
+ldf.filter(
+    (pl.col('date') >= pl.date(2022, 7, 1)) &
+    (pl.col('date') < pl.date(2022, 8, 1))
+).group_by('location_key').agg(pl.col('new_confirmed').mean()).collect().head(10)
+```
+
+#### PyArrow
+::: { .callout-note }
+While PyArrow doesn't have many of the analytical features of Polars, It excels at transforming massive amounts of data between different storage formats. For example, I use PyArrow to transfer data between DeltaLake tables and ClickHouse databases).
+:::
+
+```{python}
+# Instantiate the PyArrow Dataset
+ds = dtable.to_pyarrow_dataset()
+ds.schema
+```
+
+Find all records in July 2022 and find the average `new_confirmed` cases per `location_key`:
+
+```{python}
+import pyarrow as pa
+import pyarrow.compute as pc
+from datetime import date
+
+july_table = ds.filter(
+    ((pc.field('date') >= pa.scalar(date(2022, 7, 1), type=pa.date32())) &
+     (pc.field('date') < pa.scalar(date(2022, 8, 1), type=pa.date32()))
+     )
+).to_table()
+
+result = pa.TableGroupBy(july_table, 'location_key').aggregate([('new_confirmed', 'mean')])
+result
+```
+
+PyArrow has no integrated way to view data so we have use `result.to_pandas()` or convert the table into a polars df:
+
+```{python}
+pl.DataFrame(result).head(10)
+```
+
+### DeltaLake Maintenance
+As I mentioned earlier, delta tables will become polluted over time. This can be managed with the following:
+
+Compacting the table is useful for turning a table made up of many small files into fewer larger ones.
+
+```{python}
+dtable.optimize.compact()
+```
+
+The vacuum command is a garbage collector which cleans files which have been marked for deletion. More on this [here](https://delta-io.github.io/delta-rs/usage/managing-tables/).
+
+```{python}
+dtable.vacuum() # Does nothing in this instance because we haven't deleted any rows.
+```
+
+## Conclusion
+Delta Lake is a powerful tool for managing massive amounts of data efficiently and cost-effectively. It provides robust features like ACID transactions, scalable metadata handling, and efficient data storage formats, ensuring data integrity and reliability. By leveraging Delta Lake, organizations can perform complex data operations without compromizing on cost or performance.
+
+
+### Resources
+- [Delta Lake Python Docs](https://delta-io.github.io/delta-rs/)
+- [Polars User Guide](https://docs.pola.rs/)
+- [Polars - DeltaLake integration](https://delta-io.github.io/delta-rs/integrations/delta-lake-polars/)
+- [PyArrow Docs](https://arrow.apache.org/docs/python/index.html)
+
