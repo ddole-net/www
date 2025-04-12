@@ -22,6 +22,7 @@ A Delta Lake table is simply a collection of parquet files with matching schemas
 
 It is important to remember that unlike a basic parquet file, delta tables can become [polluted](https://delta-io.github.io/delta-rs/usage/managing-tables/) with 'old' files. I will explain below how to manage this in python.
 
+
 ## Prerequisites
 
 1. A Minio Bucket with object locking enabled
