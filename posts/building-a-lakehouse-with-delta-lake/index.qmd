@@ -1,6 +1,8 @@
 ---
 title: Building a Lakehouse with Delta Lake
 description: 'How to use the Delta Lake python library to manage massive amounts of data at scale.'
+image: assets/delta-rust-no-whitespace.svg
+date: last-modified
 author: Dhruv Dole
 keywords:
   - python

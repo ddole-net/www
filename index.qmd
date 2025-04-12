@@ -1,11 +1,30 @@
 ---
 title: "Home"
-
+layout: full
+listing:
+  - id: home-posts
+    contents: 
+      - "posts/building-a-lakehouse-with-delta-lake/index.qmd"
+    type: grid
+  - id: home-projects
+    contents: 
+      - "projects/selfhosting/index.qmd"
+    type: grid
 ---
 
 ## Hello!
 
-Welcome to my website etc...
+
+Welcome to my website
 
 
-I'm going to add posts at [posts](./posts/).
+
+
+## Featured Posts
+::: {#home-posts}
+:::
+
+
+## Project Showcase
+::: {#home-projects}
+:::
